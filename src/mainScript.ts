@@ -95,7 +95,7 @@ function checkForWin() {
       winnerIsOnDisplay();
       let diag0 = document.getElementById("line-6");
       if (diag0 != null) {
-         diag0.style.transform = " rotate(45deg) scaleX(1.0)";
+         diag0.style.transform = " rotate(45deg) scale(1.0)";
       }
    }
 
@@ -104,7 +104,7 @@ function checkForWin() {
       winnerIsOnDisplay();
       let diag1 = document.getElementById("line-7");
       if (diag1 != null) {
-         diag1.style.transform = " rotate(-45deg) scaleX(1.0)";
+         diag1.style.transform = " rotate(-45deg) scale(1.0)";
       }
    }
 
@@ -112,10 +112,44 @@ function checkForWin() {
       console.log("Gewonnen hat " + winner);
       gameOver = true;
       let gameOverImage = document.getElementById("image-game-over");
+      let restartButton = document.getElementById("restart-btn");
       setTimeout(function () {
          if (gameOverImage != null) {
             gameOverImage.classList.remove("hidden");
          }
+         if (restartButton != null) {
+            restartButton.classList.remove("hidden");
+         }
       }, 750);
    }
+}
+
+function restart() {
+   gameOver = false;
+   fields = [];
+   let gameOverImage = document.getElementById("image-game-over");
+   if (gameOverImage != null) {
+      gameOverImage.classList.add("hidden");
+   }
+   let restartButton = document.getElementById("restart-btn");
+   if (restartButton != null) {
+      restartButton.classList.add("hidden");
+   }
+   for (let i = 0; i < 8; i++) {
+      let lines = document.getElementById("line-" + i);
+      if (lines != null) {
+         lines.style.transform = "scale(0.0)";
+      }
+   }
+   for (let y = 0; y < 9; y++) {
+      let circle = document.getElementById("circle-" + y);
+      let cross = document.getElementById("cross-" + y);
+      if (circle != null) {
+         circle.classList.add("hidden");
+      }
+      if (cross != null) {
+         cross.classList.add("hidden");
+      }
+   }
+   fields = [];
 }
